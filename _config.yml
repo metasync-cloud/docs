@@ -1,0 +1,9 @@
+title: MetaSync for Confluence — Documentation
+description: Living Salesforce documentation in Confluence
+baseurl: /docs
+url: https://metasync-cloud.github.io
+# Generated from the MetaSync repo: `npm run docs:export` writes docs-site/, which is
+# copied here verbatim. Edit the source in that repo, re-export, and re-push — never
+# hand-edit these pages.
+exclude:
+  - README.md
