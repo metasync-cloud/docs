@@ -299,7 +299,7 @@ We may update this policy as the app changes. Material changes are reflected in 
 
 Questions about privacy, security, or to request a DPA:
 
-- 📧 **Email:** metasync.support@gmail.com
+- 📧 **Email:** support.metasync@maashive.app
 
 ---
 

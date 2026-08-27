@@ -134,7 +134,7 @@ These terms are governed by the laws of New South Wales, Australia, without rega
 
 ## 14. Contact
 
-- 📧 **Email:** metasync.support@gmail.com
+- 📧 **Email:** support.metasync@maashive.app
 
 ---
 

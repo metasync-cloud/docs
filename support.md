@@ -39,7 +39,7 @@ The app runs **entirely on Atlassian Forge**. There is no MetaSync-operated serv
 
 ### Channel
 
-- 📧 **Email:** metasync.support@gmail.com — the primary and authoritative support channel
+- 📧 **Email:** support.metasync@maashive.app — the primary and authoritative support channel
 - Support is provided in **English**, during Australian Eastern Time business hours, Monday to Friday, excluding NSW public holidays
 
 ### Response targets
@@ -127,6 +127,6 @@ This SLA may be updated. Material changes are reflected in the "Last Updated" da
 
 ## 10. Contact
 
-📧 **Support, security and billing questions:** metasync.support@gmail.com
+📧 **Support, security and billing questions:** support.metasync@maashive.app
 📄 **Privacy Policy:** [PRIVACY.md](privacy.md)
 📄 **Terms of Service:** [TERMS.md](terms.md)
