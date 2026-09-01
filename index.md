@@ -18,7 +18,7 @@ MetaSync documents a Salesforce org into Confluence on a schedule: objects, fiel
 - [Live View (macro)](live-view.md) — 5 sections
 - [Metadata reference](metadata-reference.md) — 41 sections
 - [Reports reference](reports-reference.md) — 14 sections
-- [Troubleshooting & FAQ](troubleshooting.md) — 9 sections
+- [Troubleshooting & FAQ](troubleshooting.md) — 10 sections
 
 ## Legal & support
 

@@ -316,7 +316,7 @@ Once an org is connected it appears as a table row with these columns:
 
 ### Connecting an org
 
-1. Click **Connect org** (shown when no org exists yet). Step 1 asks for a display name, org type (Production/Developer or Sandbox — this sets the OAuth login domain), and the **Consumer Key** and **Consumer Secret** from your Salesforce External Client App (or Connected App — see [Onboarding: from install to first sync](getting-started.md#onboarding)), plus the Confluence destination fields.
+1. Click **Connect org** (shown when no org exists yet). Step 1 asks for a display name, org type (Production/Developer, Sandbox, or a My Domain URL for an org that blocks the shared login page — this sets the OAuth login domain), and the **Consumer Key** and **Consumer Secret** from your Salesforce External Client App (or Connected App — see [Onboarding: from install to first sync](getting-started.md#onboarding)), plus the Confluence destination fields.
 2. Click **Continue to authorize**. Step 2 shows the **Callback URL** to paste into your External Client App's OAuth settings, then click **Open Salesforce login**.
 3. Complete the Salesforce login in the tab that opens. MetaSync polls for completion and finishes the connection. It requests only the `api` and `refresh_token` OAuth scopes.
 
