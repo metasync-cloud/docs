@@ -33,7 +33,7 @@ The **Overview** tab is the landing page of the MetaSync admin dashboard. It ans
 - **No Confluence destination set** — appears when the org is connected but no space is chosen. It points you to Connections → Edit destination. See [Connected Salesforce Org](#feature-connections).
 - **High-risk changes need review** — a warning that counts unreviewed high-risk changes and links you to [Change Impact](#feature-change-impact).
 - **What's new** — a dismissible banner shown once after MetaSync updates to a new version, listing the highlights of that release. First-time installs are seeded silently (no changelog on day one). Dismissing it is remembered per browser.
-- **Salesforce connection needs re-authorization** — a warning shown app-wide when the stored token was rejected; it carries a one-click **Reconnect Salesforce** button. See [Reconnecting your Salesforce org](troubleshooting.md#ts-reconnect).
+- **Salesforce connection needs re-authorization** — a warning shown app-wide when the stored token was rejected; it carries a one-click **Re-authorize Salesforce** button. See [Re-authorizing your Salesforce org](troubleshooting.md#ts-reconnect).
 
 ### Connected-org strip
 
@@ -300,7 +300,7 @@ MetaSync keeps the **20 most recent runs** — older runs are dropped, and the c
 <a id="feature-connections"></a>
 ## Connected Salesforce Org
 
-The **Connections** tab manages the one Salesforce org MetaSync syncs into Confluence. From here you connect an org, re-authorize an expired connection, and change the Confluence destination.
+The **Connections** tab manages the one Salesforce org MetaSync syncs into Confluence. From here you connect an org, re-authorize an expired connection, switch to a different org, and change the Confluence destination.
 
 ### The connection card
 
@@ -311,16 +311,18 @@ Once an org is connected it appears as a table row with these columns:
 - **Destination** — The Confluence space name (or `Not set`), with the space key underneath.
 - **API** — The Salesforce API version MetaSync reads at. `67.0` reads normally; any other version is flagged amber with a ⚠.
 - **Last sync** — Relative time since the last successful sync.
-- **Status** — A **connected** (green) or disconnected (red) lozenge.
-- **(actions)** — An **Edit destination** button.
+- **Status** — A lozenge reading **Connected** (green), **Needs re-authorization** (red — the stored token was rejected, see [Re-authorizing your Salesforce org](troubleshooting.md#ts-reconnect)) or **Not yet checked** (grey — the hourly credential-health check has yet to report on this connection).
+- **(actions)** — An **Edit destination** button, plus a **Re-authorize** button on the row while the status reads *Needs re-authorization*.
 
 ### Connecting an org
 
-1. Click **Connect org** (shown when no org exists yet). Step 1 asks for a display name, org type (Production/Developer, Sandbox, or a My Domain URL for an org that blocks the shared login page — this sets the OAuth login domain), and the **Consumer Key** and **Consumer Secret** from your Salesforce External Client App (or Connected App — see [Onboarding: from install to first sync](getting-started.md#onboarding)), plus the Confluence destination fields.
-2. Click **Continue to authorize**. Step 2 shows the **Callback URL** to paste into your External Client App's OAuth settings, then click **Open Salesforce login**.
-3. Complete the Salesforce login in the tab that opens. MetaSync polls for completion and finishes the connection. It requests only the `api` and `refresh_token` OAuth scopes.
+**Connect org** is the header button while no org is connected. The dialog runs in three steps, each headed with a **Step n of 3** line:
 
-> **Note — Reconnecting — and switching orgs.** When an org already exists, the button becomes **Reconnect**. It serves both purposes: **re-authorising the same org** after an expired or revoked token (recovery steps in [Reconnecting your Salesforce org](troubleshooting.md#ts-reconnect)), and **replacing the connection with a different org** — completing the OAuth login against another org overwrites the stored connection. There is no separate Disconnect or Delete-connection action; see [Switching to a different Salesforce org](troubleshooting.md#ts-switch-org) for the switch walkthrough and its consequences (full re-sync, old pages left in place).
+1. **Salesforce app.** The **Callback URL** for this installation sits at the top of the step, above the credential fields, with a **Copy** button — that is the value your Salesforce OAuth app needs on its callback list, and it doesn't depend on the app, so you can copy it before the app exists. Below it: the org type (Production/Developer, Sandbox, or **My Domain URL** for an org that blocks the shared login page — this sets the OAuth login domain), the **Consumer Key** and **Consumer Secret** from your External Client App (or Connected App — see [Onboarding: from install to first sync](getting-started.md#onboarding)), and a display name, which follows the org type until you type your own. Click **Next: Confluence destination**.
+2. **Confluence destination.** The space, home page title, page structure and managed-package choice, with the live page-tree preview — the same fields the Edit destination modal uses, described below. Click **Continue to Salesforce login**.
+3. **Authorize.** The Callback URL appears once more as a reminder; click **Open Salesforce login** and complete the login in the tab that opens. MetaSync polls for completion and finishes the connection, saving the destination from step 2. It requests only the `api` and `refresh_token` OAuth scopes. If Salesforce refuses, the error banner here links straight to [The Salesforce login fails or shows an error](troubleshooting.md#ts-connect-errors).
+
+> **Note — Re-authorize and Switch org are separate buttons.** Once an org is connected the header carries two buttons. **Re-authorize** signs back in to **that same org** after an expired or revoked token: a two-step dialog that reuses the app keys saved with the connection — no credential fields, and no destination step, so your space, structure, scope and schedules stay exactly as they are (recovery steps in [Re-authorizing your Salesforce org](troubleshooting.md#ts-reconnect)). **Switch org** replaces the connection with a **different** org: the full three-step dialog, titled *Switch the connected org*, warning you that finishing it replaces the connection, with step 2 prefilled from the current destination. There is no separate Disconnect or Delete-connection action; see [Switching to a different Salesforce org](troubleshooting.md#ts-switch-org) for the switch walkthrough and its consequences (full re-sync, old pages left in place).
 
 ### Edit destination modal
 
@@ -383,7 +385,7 @@ Each channel has its own **Test** button that sends a one-off test message so yo
 
 - **A sync fails or completes partially** — On by default. Fires on a transition into failure, on a genuinely different error, and re-reminds at most once every 24h while a sync stays broken — it won't spam a channel every 5-minute tick.
 - **A sync recovers after a failure** — On by default. One message when a sync succeeds after a prior failure.
-- **The Salesforce connection expires or is revoked** — On by default. One message per outage, driven by the hourly credential-health check. See [Reconnecting your Salesforce org](troubleshooting.md#ts-reconnect).
+- **The Salesforce connection expires or is revoked** — On by default. One message per outage, driven by the hourly credential-health check. See [Re-authorizing your Salesforce org](troubleshooting.md#ts-reconnect).
 - **Data-security drift is detected** — On by default. Fires when a sync finds the sensitive-data footprint **regressed** since the previous sync — a removed classification, removed encryption, or a new classification gap on a field MetaSync already knew about. Newly-seen sensitive fields are coverage change and deliberately do **not** alert. **Counts only; field names never leave the app.** The affected fields are listed on the Data Security Posture page. See [Data Security & Classification](#feature-data-security).
 - **A sync completes successfully** — Off by default (opt-in). With the indented **Only when pages changed** option (on by default), a no-change run stays silent. A recovery message takes precedence — you won't get both for the same run.
 - **Weekly summary digest** — Off by default (opt-in). A once-a-week roll-up: run counts by outcome, total pages, top orgs, and whether the latest sync is currently failing. The **first digest arrives one week after you enable it**, and a quiet week still sends ("no syncs ran").
