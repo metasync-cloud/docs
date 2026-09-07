@@ -49,7 +49,7 @@ Three promises, and they are enforced in code, not just in prose:
 
 - **Beta runs until 29 November 2026.**
 - **General availability:** the Marketplace listing goes live once the exit criteria below are met (target: week of 30 November 2026).
-- **Founding-customer price:** beta orgs get 50 % off for 12 months from GA.
+- **Founding-customer price:** beta orgs get 100 % off for 12 months from GA.
 - **Migration:** the beta app and the Marketplace app are two separate app registrations. At GA you uninstall **MetaSync (Beta)**, install **MetaSync for Confluence** from the Marketplace, update the Callback URL in your External Client App (it is per-installation), reconnect, and choose the same space — existing pages are adopted by title. Change-impact baselines and sync history start fresh; the pages don't. We'll do it with you on a call.
 
 ## Exit criteria (how we decide it's ready)
